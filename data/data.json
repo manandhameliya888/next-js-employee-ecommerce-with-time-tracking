@@ -1,6 +1,46 @@
-[
+{
+  "user": [
     {
-        "firstName" : "Darshan",
-        "lastName" : "Bhikadiya"
+      "id": "2dcb",
+      "firstName": "Darshan",
+      "lastName": "Bhikadiya",
+      "email": "darshanbhikadiya@gmail.com",
+      "password": "1234"
+    },
+    {
+      "id": "4e69",
+      "firstName": "Manan",
+      "lastName": "Dhameliya",
+      "email": "manandhameliya@gmail.com",
+      "password": "2345"
+    },
+    {
+      "id": "df35",
+      "firstName": "Yash",
+      "lastName": "Dhori",
+      "email": "yashdhori@gmail.com",
+      "password": "3456"
+    },
+    {
+      "id": "cd7f",
+      "firstName": "Yogi",
+      "lastName": "Gabani",
+      "email": "yogigabani@gmail.com",
+      "password": "4567"
+    },
+    {
+      "id": "c113",
+      "firstName": "Milan",
+      "lastName": "Dhola",
+      "email": "milandhola@gmail.com",
+      "password": "6789"
+    },
+    {
+      "id": "0a95",
+      "firstName": "Bhautik",
+      "lastName": "Vekariya",
+      "email": "bhautikvekariya@gmail.com",
+      "password": "bv@123"
     }
-]
+  ]
+}

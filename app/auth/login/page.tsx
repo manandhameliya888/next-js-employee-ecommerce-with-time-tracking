@@ -7,36 +7,44 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 
-import connectDB from "@/lib/connectDB";
-import PostModel from "@/models/User";
-import axios from "axios";
-
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const router = useRouter();
 
-
-  // const create = async(formData: FormData) => {
-  //     'use server'
-
-  //     await connectDB();
-
-  //     const result = await PostModel.create({
-  //       title : formData.get("title"),
-  //       body: formData.get("body")
-  //     });
-  // }
-
-  const handleSubmit = async(e:React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Add authentication logic here
-    router.push("/dashboard");
-    try{
-      const response = await axios.post('/api/users', {email, password})
-      console.log(response);
-    }catch(err){
-      console.log(err);
+    try {
+      const response = await fetch("http://localhost:3000/user");
+      const users = await response.json();
+
+      const user = users.find((user: any) => user.email === email);
+
+      if (!user) {
+        setError("Email is wrong");
+        return;
+      }
+
+      if (user.password !== password) {
+        setError("Password is wrong"); 
+        return;
+      }
+
+      const foundUser = users.find(
+        (user: { email: string; password: string }) =>
+          user.email === email && user.password === password
+      );
+  
+      if (foundUser) {
+        localStorage.setItem("userLastName", foundUser.lastName);
+      }
+
+      router.push("/dashboard");
+
+    } catch (error) {
+      console.error("Login error:", error);
+      setError("Server error. Please try again later.");
     }
   };
 
@@ -48,6 +56,7 @@ export default function LoginPage() {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
+            {error && <p className="text-red-500 text-sm text-center">{error}</p>}
             <div className="space-y-2">
               <label className="text-sm font-medium">Email</label>
               <Input
@@ -68,7 +77,6 @@ export default function LoginPage() {
                 required
               />
             </div>
-            {/* <Button type="submit" className="w-full "> */}
             <Button type="submit" className="w-full h-auto relative z-0 rounded-lg transition-all duration-300 hover:scale-95">
               Login
             </Button>
