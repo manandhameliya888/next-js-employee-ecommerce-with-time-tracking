@@ -42,6 +42,13 @@ export function Sidebar() {
   const pathname = usePathname();
   const router = useRouter();
 
+  const handleLogout = () => {
+    sessionStorage.removeItem("accessToken");
+    sessionStorage.removeItem("loginTime");
+    router.push("/auth/login"); // Redirect after logout
+  };
+
+
   return (
     <div className="flex flex-col h-screen bg-gray-900 text-white w-64">
       <div className="flex items-center p-4">
@@ -72,7 +79,11 @@ export function Sidebar() {
         </ul>
       </nav>
       <div className="p-4">
-        <button onClick={()=>{router.push("/auth/login")}} className="flex items-center space-x-3 p-3 w-full rounded-lg hover:bg-gray-800 transition-colors">
+        {/* <button onClick={()=>{router.push("/auth/login")}} className="flex items-center space-x-3 p-3 w-full rounded-lg hover:bg-gray-800 transition-colors">
+          <LogOut className="w-5 h-5" />
+          <span>Logout</span>
+        </button> */}
+        <button onClick={handleLogout} className="flex items-center space-x-3 p-3 w-full rounded-lg hover:bg-gray-800 transition-colors">
           <LogOut className="w-5 h-5" />
           <span>Logout</span>
         </button>

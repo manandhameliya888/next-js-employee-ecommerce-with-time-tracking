@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
@@ -23,11 +24,13 @@ interface TimeLog {
 
 export default function DashboardPage() {
   const { dayLogs, setDayLogs, isClockedIn, setIsClockedIn } = useAttendance();
+  const router = useRouter();
   const [currentTime, setCurrentTime] = useState(new Date());
 
   const WORK_START_HOUR = 9;
   const WORK_END_HOUR = 19;
 
+  //clock mate che 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date());
@@ -35,6 +38,30 @@ export default function DashboardPage() {
 
     return () => clearInterval(timer);
   }, []);
+
+
+  //session time check karva mate che
+  // useEffect(() => {
+  //   const accessToken = sessionStorage.getItem("accessToken");
+  //   const loginTime = sessionStorage.getItem("loginTime");
+
+  //   if (!accessToken || !loginTime) {
+  //     sessionStorage.clear();
+  //     router.push("/auth/login"); // Redirect to login if no session
+  //     return;
+  //   }
+
+  //   const currentTime = new Date().getTime();
+  //   const sessionDuration = currentTime - parseInt(loginTime);
+
+  //   if (sessionDuration > 1 * 60 * 1000) {
+  //     sessionStorage.clear();
+  //     router.push("/auth/login"); // Session expired
+  //   } else {
+  //     setUserLastName(sessionStorage.getItem("userLastName"));
+  //   }
+  // }, []);
+
 
   const formatTime = (date: Date) => {
     return new Intl.DateTimeFormat("en-US", {
@@ -205,17 +232,6 @@ export default function DashboardPage() {
               <p className="flex text-4xl font-semibold leading-none text-gray-700 tracking-tight">
                 {/* <span className="text-violet-600">Hi</span>, Bhikadiya */}
                 <span className="text-violet-600">Hi</span>,
-                {/* {
-                newData.length > 0 ? (
-                  newData.filter((user) => user.lastName === user.lastName).map((user, index) => (
-                    // Ahiya bhikadiya ne dynamic banavanu che etle ke login/signup page per thi username password lai ne ahiya compare karvanu che ee form submition thi kari nakhvanu
-                    <div key={index} className="ml-2">
-                      <p>{user.lastName}</p>
-                    </div>
-                    ))
-                 ) : (
-                    <span className="text-gray-400">Loading...</span>
-                )} */}
                 {userLastName ? (
                   <span className="ml-2">{userLastName}</span>
                 ) : (

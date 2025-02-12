@@ -41,6 +41,13 @@
       "lastName": "Vekariya",
       "email": "bhautikvekariya@gmail.com",
       "password": "bv@123"
+    },
+    {
+      "id": "22fb",
+      "firstName": "Ayush",
+      "lastName": "Dabhi",
+      "email": "ayushdabhi@gmail.com",
+      "password": "ab@123"
     }
   ]
 }
